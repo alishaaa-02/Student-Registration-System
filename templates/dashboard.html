@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="floating-circle"></div>
+    <div class="floating-circle2"></div>
+
+<div class="hero">
+
+    <nav class="navbar">
+        <h2>🎓 StudentSys</h2>
+        <a href="/" class="nav-btn">Home</a>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h1 style="margin-top:30px;">Student Dashboard</h1>
+<p style="margin-bottom:20px;">All Registered Students</p>
+<p id="liveClock" style="margin-bottom:20px; color:#00c6ff; font-weight:bold;"></p>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <h3>Total Students</h3>
+        <h2>{{ total_students }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Courses</h3>
+        <h2>{{ total_courses }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>System Status</h3>
+        <h2>Online</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Records</h3>
+        <h2>Active</h2>
+    </div>
+
+</div>
+
+<div class="chart-box">
+
+    <h2 style="margin-bottom:20px;">Student Analytics</h2>
+
+    <canvas id="studentChart"></canvas>
+
+</div>
+
+<form action="/search" method="GET" class="search-box">
+    <input type="text" name="query" placeholder="Search by name, email or course">
+    <button type="submit" class="btn">Search</button>
+</form>
+
+<p class="result-count">
+    Showing {{ students|length }} result(s)
+</p>
+
+<a href="/export" class="btn" style="margin-bottom:20px; display:inline-block;">
+    Export CSV
+</a>
+
+    <div class="table-box">
+
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Course</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+
+            {% if students %}
+            
+            {% for student in students %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+                <td>{{ student[7] }}</td>
+                <td>
+                    <a href="/edit/{{ student[0] }}" class="edit-btn">Edit</a>
+                    <a href="/delete/{{ student[0] }}" class="delete-btn"onclick="return confirm('Delete this student?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+        <tr>
+            <td colspan="9" style="text-align:center; padding:25px;">
+                No student records found 📂
+            </td>
+        </tr>
+        {% endif %}
+
+        </table>
+
+    </div>
+
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('studentChart');
+
+if(ctx){
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels | tojson }},
+            datasets: [{
+                label: 'Students by Course',
+                data: {{ values | tojson }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins:{
+                legend:{
+                    labels:{ color:'white' }
+                }
+            },
+            scales:{
+                x:{ ticks:{ color:'white' } },
+                y:{ ticks:{ color:'white' } }
+            }
+        }
+    });
+}
+</script>
+</body>
+</html>

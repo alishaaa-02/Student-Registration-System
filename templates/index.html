@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="floating-circle"></div>
+    <div class="floating-circle2"></div>
+    <div class="hero">
+
+        <nav class="navbar">
+            <h2>🎓 StudentSys</h2>
+            <a href="/students" class="nav-btn">Dashboard</a>
+        </nav>
+
+        <div class="hero-container">
+
+    <div class="hero-left">
+        <h1>Smart Student Registration System</h1>
+        <p>Manage student records easily with modern technology.</p>
+
+        <div class="hero-buttons">
+            <a href="/register" class="btn">Register Student</a>
+            <a href="/students" class="btn secondary-btn">View Students</a>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <img src="{{ url_for('static', filename='images/student.png') }}" alt="hero" class="hero-img">
+    </div>
+
+</div>
+
+    </div>
+<section class="features-section">
+
+    <h2>Why Choose StudentSys?</h2>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <h3>⚡ Fast Registration</h3>
+            <p>Add student records quickly with smooth forms.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔒 Secure Data</h3>
+            <p>Stored safely using MySQL database system.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📊 Smart Dashboard</h3>
+            <p>Search, edit, delete and manage records easily.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📁 Export Reports</h3>
+            <p>Download student data instantly in CSV format.</p>
+        </div>
+
+    </div>
+
+</section>
+<footer class="footer">
+    <p>© 2026 StudentSys | Built by Alisha Verma</p>
+</footer>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
