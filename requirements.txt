@@ -1,3 +1,0 @@
-Flask → runs your web application == 3.0.3
-mysql-connector-python → connects Python/Flask with MySQL == 8.4.0
-gunicorn → Render uses Gunicorn as production server == 22.0.0
