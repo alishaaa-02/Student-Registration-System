@@ -31,6 +31,10 @@ app = Flask(__name__)
 load_dotenv()
 app.secret_key = os.getenv("SECRET_KEY")
 
+@app.route("/")
+def home():
+    return render_template("index.html")
+
 """db = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
