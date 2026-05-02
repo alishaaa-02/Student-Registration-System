@@ -1,5 +1,6 @@
 # 🎓 Student Registration System
-A full-stack web application to manage student records using Flask and SQLite.
+A full-stack Student Registration System built using Flask and SQLite. 
+It allows users to register students, view data in a dashboard, search records, edit details, and export data as CSV. The project is deployed on Render.
 
 ## 🚀 Features
 - Add Student Records
@@ -19,6 +20,7 @@ A full-stack web application to manage student records using Flask and SQLite.
 - CSS
 - JavaScript
 - Chart.js
+- Deployment: Render
 
 ## ▶ How to Run
 1. Open project in VS Code
@@ -37,5 +39,5 @@ http://127.0.0.1:5000
 ## 👩‍💻 Developed By
 Alisha Verma
 
-## 🚀 Deloyed link
+## 🚀 Live Demo
 https://student-registeration-system.onrender.com/students
