@@ -1,5 +1,5 @@
 # 🎓 Student Registration System
-A full-stack web application to manage student records using Flask and MySQL.
+A full-stack web application to manage student records using Flask and SQLite.
 
 ## 🚀 Features
 - Add Student Records
@@ -14,7 +14,7 @@ A full-stack web application to manage student records using Flask and MySQL.
 ## 🛠 Tech Stack
 - Python
 - Flask
-- MySQL
+- SQLite
 - HTML
 - CSS
 - JavaScript

@@ -21,6 +21,22 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def init_db():
+    conn = sqlite3.connect('students.db')
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS students (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            email TEXT,
+            phone TEXT,
+            course TEXT,
+            gender TEXT,
+            dob TEXT,
+            address TEXT
+        )
+    ''')
+    conn.close()
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -167,6 +183,7 @@ def export_csv():
     )
 
 if __name__ == '__main__':
+    init_db()
     app.run(
         host='0.0.0.0',
         port=int(os.environ.get("PORT", 5000))
