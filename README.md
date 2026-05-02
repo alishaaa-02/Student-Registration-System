@@ -36,3 +36,6 @@ http://127.0.0.1:5000
 
 ## 👩‍💻 Developed By
 Alisha Verma
+
+## 🚀 Deloyed link
+https://student-registeration-system.onrender.com/students
