@@ -4,6 +4,29 @@ import sqlite3
 import os
 from dotenv import load_dotenv
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "students.db")
+
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS students (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT,
+        phone TEXT,
+        course TEXT,
+        gender TEXT,
+        dob TEXT,
+        address TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
 app = Flask(__name__)
 load_dotenv()
 app.secret_key = os.getenv("SECRET_KEY")
@@ -182,9 +205,7 @@ def export_csv():
         headers={"Content-Disposition":"attachment; filename=students.csv"}
     )
 
-if __name__ == '__main__':
-    init_db()
-    app.run(
-        host='0.0.0.0',
-        port=int(os.environ.get("PORT", 5000))
-    )
+app = Flask(__name__)
+init_db()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
