@@ -31,6 +31,8 @@ app = Flask(__name__)
 load_dotenv()
 app.secret_key = os.getenv("SECRET_KEY")
 
+init_db()
+
 """db = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
@@ -40,25 +42,10 @@ app.secret_key = os.getenv("SECRET_KEY")
 cursor = db.cursor()"""
 
 def get_db_connection():
-    conn = sqlite3.connect('students.db')
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
-def init_db():
-    conn = sqlite3.connect('students.db')
-    conn.execute('''
-        CREATE TABLE IF NOT EXISTS students (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            email TEXT,
-            phone TEXT,
-            course TEXT,
-            gender TEXT,
-            dob TEXT,
-            address TEXT
-        )
-    ''')
-    conn.close()
 
 @app.route('/')
 def home():
@@ -197,7 +184,7 @@ def export_csv():
     csv_data = "ID,Name,Email,Phone,Course,Gender,DOB,Address\n"
     
     for student in students:
-        csv_data += f"{student['id']},{student['name']},{student['email']},{student['phone']},{student['course']},{student['gender']},{student['dob']},{student['address']}"
+        csv_data += f"{student['id']},{student['name']},{student['email']},{student['phone']},{student['course']},{student['gender']},{student['dob']},{student['address']}\n"
 
     return Response(
         csv_data,
@@ -205,13 +192,6 @@ def export_csv():
         headers={"Content-Disposition":"attachment; filename=students.csv"}
     )
 
-app = Flask(__name__)
-
-init_db()   # ✅ initialize DB here
-
-@app.route("/")
-def home():
-    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
