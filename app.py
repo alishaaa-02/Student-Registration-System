@@ -31,10 +31,6 @@ app = Flask(__name__)
 load_dotenv()
 app.secret_key = os.getenv("SECRET_KEY")
 
-@app.route("/")
-def home():
-    return render_template("index.html")
-
 """db = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
@@ -211,9 +207,11 @@ def export_csv():
 
 app = Flask(__name__)
 
-@app.before_first_request
-def initialize():
-    init_db()
+init_db()   # ✅ initialize DB here
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
