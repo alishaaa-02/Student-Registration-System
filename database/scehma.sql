@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS studentdb;
+
+USE studentdb;
+
+CREATE TABLE IF NOT EXISTS students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    course VARCHAR(100) NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    dob DATE NOT NULL,
+    address TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
